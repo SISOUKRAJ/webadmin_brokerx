@@ -1,0 +1,60 @@
+:root {
+  /* Width */
+  --height-header: 47px;
+  /* Color */
+  --color-green: #2a6d5b;
+  --color-yellow: #f0d711;
+  --color-gray: #fafafa;
+  /* Shadow */
+  --tw-shadow: 5px 0 25px 0 #5e5c9a1a;
+  --tw-shadow-colored: 5px 0 25px 0 #5e5c9a1a;
+}
+
+.header {
+  height: var(--height-header);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-green);
+}
+.header-left-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: var(--height-header);
+  width: 200px;
+  margin-left: 10px;
+}
+.header-right-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  height: var(--height-header);
+  width: 200px;
+  margin-right: 20px;
+}
+.btntogleheader {
+  margin: 0 10px !important;
+  color: var(--color-green);
+  /* background-color: var(--color-green); */
+  border-color: var(--color-green);
+}
+/* =========================== Contents =========================== */
+.contents {
+  display: flex;
+  flex-direction: row;
+}
+.content {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--color-gray);
+}
+/* =========================== ant design =========================== */
+.ant-menu-inline-collapsed {
+  border-right: 1px solid var(--color-green) !important;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-menu-inline {
+  width: 15% !important;
+  border-right: 1px solid var(--color-green) !important;
+}
