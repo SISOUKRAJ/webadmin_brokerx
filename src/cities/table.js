@@ -1,7 +1,6 @@
 import { Table } from 'antd';
 import qs from 'qs';
 import { useEffect, useState } from 'react';
-
 const columns = [
   {
     title: 'Name',
@@ -44,9 +43,9 @@ const App = () => {
       pageSize: 20,
     },
   });
-  const fetchData = () => {
+  const fetchData = async () => {
     setLoading(true);
-    fetch(`https://randomuser.me/api?${qs.stringify(getRandomuserParams(tableParams))}`)
+   await fetch(`https://randomuser.me/api?${qs.stringify(getRandomuserParams(tableParams))}`)
       .then((res) => res.json())
       .then(({ results }) => {
         setData(results);
@@ -66,7 +65,7 @@ const App = () => {
   useEffect(() => {
     fetchData();
   }, [JSON.stringify(tableParams)]);
-
+  
   const handleTableChange = (pagination, filters, sorter) => {
     setTableParams({
       pagination,

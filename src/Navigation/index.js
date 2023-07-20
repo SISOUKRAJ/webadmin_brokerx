@@ -27,7 +27,7 @@ const items = [
   getItem("Dashbroad", "/", <PieChartOutlined />),
   getItem("Master Data", "sub2", <DesktopOutlined />, [
     getItem("User", "/user"),
-    getItem("Option 6", "6"),
+    getItem("Cities", "/cities"),
     getItem("Option 7", "7"),
     getItem("Option 8", "8"),
   ]),
@@ -42,7 +42,7 @@ const App = () => {
 
   const [current, setCurrent] = useState("/");
   const onClick = (e) => {
-    console.log("click ", e);
+    console.log("click ", e.key);
     setCurrent(e.key);
     navigate(e.key);
   };

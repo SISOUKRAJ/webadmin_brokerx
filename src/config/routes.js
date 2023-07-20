@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../home";
 import About from "../about";
 import User from "../user";
+import Cities from "../cities"
 // === End Routes ===
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" exact element={<Home />}></Route>
         <Route path="/about" exact element={<About />}></Route>
         <Route path="/user" exact element={<User />}></Route>
+        <Route path="/cities" exact element={<Cities />}></Route>
       </Routes>
     </>
   );
