@@ -28,8 +28,8 @@ const items = [
   getItem("Master Data", "sub2", <DesktopOutlined />, [
     getItem("User", "/user"),
     getItem("Cities", "/cities"),
-    getItem("Option 7", "7"),
-    getItem("Option 8", "8"),
+    getItem("Property Type", "/proptype"),
+    getItem("Properties", "/properties"),
   ]),
   getItem("about", "/about", <DesktopOutlined />),
 ];
@@ -61,9 +61,6 @@ const App = () => {
       </div>
       <div
         className="contents"
-        style={{
-          width: "100vw",
-        }}
       >
         <Menu
           onClick={onClick}
@@ -75,7 +72,7 @@ const App = () => {
           inlineCollapsed={collapsed}
           items={items}
           style={{
-            height: "95vh",
+            height: "93vh",
           }}
         />
         <div className="content">

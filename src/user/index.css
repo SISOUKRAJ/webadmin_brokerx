@@ -1,6 +1,6 @@
 :root {
   /* Width */
-  --height-header: 47px;
+  --height-contents: 75vh;
   /* Color */
   --color-green: #2a6d5b;
   --color-yellow: #f0d711;
@@ -16,7 +16,7 @@
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   background-color: var(--color-white);
   margin-right: 10px;
-  height: 82vh;
+  height: var(--height-contents);
   padding: 20px;
   border-radius: 10px;
 }
@@ -29,7 +29,11 @@
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   background-color: var(--color-white);
   margin-left: 10px;
-  height: 82vh;
+  height: var(--height-contents);
   padding: 20px;
   border-radius: 10px;
+}
+
+.ant-form-item{
+  margin-bottom: 10px !important;
 }

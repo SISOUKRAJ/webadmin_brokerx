@@ -1,6 +1,6 @@
 :root {
-  /* Width */
-  --height-header: 47px;
+  /* height */
+  --height-header: 51px;
   /* Color */
   --color-green: #2a6d5b;
   --color-yellow: #f0d711;
@@ -49,12 +49,16 @@
   width: 100%;
   padding: 20px;
   background-color: var(--color-gray);
+  position: relative;
+  /* border: 1px solid red; */
+  overflow: auto;
+  height: 87.7vh;
 }
 /* =========================== ant design =========================== */
 .ant-menu-inline-collapsed {
   border-right: 1px solid var(--color-green) !important;
 }
 :where(.css-dev-only-do-not-override-1sn0ohr).ant-menu-inline {
-  width: 15% !important;
+  width: 20% !important;
   border-right: 1px solid var(--color-green) !important;
 }
