@@ -1,6 +1,6 @@
 :root {
   /* height */
-  --height-header: 51px;
+  --height-header: 6vh;
   /* Color */
   --color-green: #2a6d5b;
   --color-yellow: #f0d711;
@@ -8,6 +8,12 @@
   /* Shadow */
   --tw-shadow: 5px 0 25px 0 #5e5c9a1a;
   --tw-shadow-colored: 5px 0 25px 0 #5e5c9a1a;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+}
+
+.min-h-screen {
+  min-height: 100vh;
 }
 
 .header {
@@ -15,7 +21,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-green);
+  /* box-shadow: rgba(0, 0, 0, 0.30) 0px -10px 5px -10px inset; */
 }
 .header-left-box {
   display: flex;
@@ -41,10 +47,15 @@
   border-color: var(--color-green);
 }
 /* =========================== Contents =========================== */
-.contents {
+.main-contents {
   display: flex;
   flex-direction: row;
+  overflow: auto;
+  height: 94vh;
 }
+/* .ant-menu{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px 0px inset ;
+} */
 .content {
   width: 100%;
   padding: 20px;
@@ -52,13 +63,38 @@
   position: relative;
   /* border: 1px solid red; */
   overflow: auto;
-  height: 87.7vh;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px inset;
+}
+
+.left-box {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: var(--color-white);
+  margin-right: 10px;
+  height: var(--height-contents);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.right-box {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: var(--color-white);
+  margin-left: 10px;
+  height: var(--height-contents);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.ant-form-item{
+  margin-bottom: 10px !important;
 }
 /* =========================== ant design =========================== */
-.ant-menu-inline-collapsed {
-  border-right: 1px solid var(--color-green) !important;
-}
 :where(.css-dev-only-do-not-override-1sn0ohr).ant-menu-inline {
   width: 20% !important;
-  border-right: 1px solid var(--color-green) !important;
+}
+/* =========================== responsive =========================== */
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 1200px) {
+  .contents {
+    height: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
 }

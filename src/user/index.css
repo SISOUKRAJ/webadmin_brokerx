@@ -1,39 +1,9 @@
 :root {
   /* Width */
-  --height-contents: 75vh;
+  --height-contents: 90%;
   /* Color */
   --color-green: #2a6d5b;
   --color-yellow: #f0d711;
   --color-gray: #fafafa;
   --color-white: #fff;
-}
-
-.left-box {
-  --tw-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),
-    0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  background-color: var(--color-white);
-  margin-right: 10px;
-  height: var(--height-contents);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.right-box {
-  --tw-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),
-    0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  background-color: var(--color-white);
-  margin-left: 10px;
-  height: var(--height-contents);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.ant-form-item{
-  margin-bottom: 10px !important;
 }

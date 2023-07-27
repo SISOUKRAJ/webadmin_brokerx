@@ -4,11 +4,12 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   DesktopOutlined,
+  SettingOutlined
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 // === Start Part ===
-import Router from "../config/routes"
+import Router from "../config/routes";
 import Userinfo from "./userinfo";
 import "./index.css";
 // === End Part ===
@@ -31,7 +32,7 @@ const items = [
     getItem("Property Type", "/proptype"),
     getItem("Properties", "/properties"),
   ]),
-  getItem("about", "/about", <DesktopOutlined />),
+  getItem("about", "/about", <SettingOutlined />),
 ];
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -42,16 +43,19 @@ const App = () => {
 
   const [current, setCurrent] = useState("/");
   const onClick = (e) => {
-    console.log("click ", e.key);
+    // console.log("click ", e.key);
     setCurrent(e.key);
     navigate(e.key);
   };
-
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="header">
         <div className="header-left-box">
-          <Button className="btntogleheader" type="dashed" onClick={toggleCollapsed}>
+          <Button
+            className="btntogleheader"
+            type="dashed"
+            onClick={toggleCollapsed}
+          >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </Button>
         </div>
@@ -59,24 +63,19 @@ const App = () => {
           <Userinfo />
         </div>
       </div>
-      <div
-        className="contents"
-      >
+      <div className="main-contents">
         <Menu
           onClick={onClick}
           selectedKeys={[current]}
           defaultSelectedKeys={["/"]}
           defaultOpenKeys={["sub2"]}
           mode="inline"
-          theme=""
+          theme="light"
           inlineCollapsed={collapsed}
           items={items}
-          style={{
-            height: "93vh",
-          }}
         />
         <div className="content">
-          <Router/>
+          <Router />
         </div>
       </div>
     </div>
