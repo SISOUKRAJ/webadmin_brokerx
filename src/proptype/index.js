@@ -20,13 +20,13 @@ const Cities = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (e) => {
-    console.log("aaa", e);
+    // console.log("aaa", e);
     // message.success("Submit success!");
     setLoading(true);
 
     await axios({
       method: "post",
-      url: `http://127.0.0.1:9798/api/city`,
+      url: `http://127.0.0.1:9798/api/property_type`,
       data: e,
     }).then(function (response) {
       let data = response.data;
@@ -34,23 +34,27 @@ const Cities = () => {
       // openNotificationWithIcon("success");
       api["success"]({
         message: "Save success",
-        description: `City name: ${data.city_name}`,
+        description: `Type name: ${data.city_name}`,
       });
       setLoading(false);
       form.setFieldsValue({
-        city_name: "",
+        type_name: "",
       });
     });
   };
 
   const onFinishFailed = (e) => {
-    console.log("bbb", e);
-    message.error("Submit failed!");
+    // console.log("bbb", e);
+    // message.error("Submit failed!");
+    // api["error"]({
+    //   message: "Submit failed!",
+    //   description: `Type name: ${e.errorFields[0].errors[0]}`,
+    // });
   };
 
   const onFill = () => {
     form.setFieldsValue({
-      city_name: "",
+      type_name: "",
     });
   };
 
@@ -68,7 +72,7 @@ const Cities = () => {
             title: "Master Data",
           },
           {
-            title: "Cities",
+            title: "Property Type",
           },
         ]}
       />
@@ -83,22 +87,11 @@ const Cities = () => {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              {/* <Form.Item
-                  name="city_id"
-                  label="ID"
-                  rules={[
-                    { required: true, message: 'Please input City ID!' },
-                    { type: "string", warningOnly: true },
-                    { type: "string", min: 2 },
-                  ]}
-                >
-                  <Input placeholder="input placeholder" />
-                </Form.Item> */}
               <Form.Item
-                name="city_name"
+                name="type_name"
                 label="Name"
                 rules={[
-                  { required: true, message: "Please input City Name!" },
+                  { required: true, message: "Please input Type Name!" },
                   { type: "string", warningOnly: true },
                   { type: "string", min: 2 },
                 ]}

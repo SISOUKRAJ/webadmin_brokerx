@@ -1,6 +1,7 @@
 :root {
   /* height */
   --height-header: 6vh;
+  --height-contents: 90%;
   /* Color */
   --color-green: #2a6d5b;
   --color-yellow: #f0d711;

@@ -29,7 +29,7 @@ const items = [
   getItem("Master Data", "sub2", <DesktopOutlined />, [
     getItem("User", "/user"),
     getItem("Cities", "/cities"),
-    getItem("Property Type", "/proptype"),
+    getItem("Property Type", "/property_type"),
     getItem("Properties", "/properties"),
   ]),
   getItem("about", "/about", <SettingOutlined />),

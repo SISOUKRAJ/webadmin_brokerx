@@ -41,7 +41,7 @@ const App = (props) => {
     setLoading(true);
     await axios({
       method: "get",
-      url: "http://127.0.0.1:9798/api/city",
+      url: "http://127.0.0.1:9798/api/property_type",
     }).then(function (response) {
       let data = response.data;
       // console.log("aaaaa=======>", data);
@@ -63,7 +63,7 @@ const App = (props) => {
 
   const edit = (record) => {
     form.setFieldsValue({
-      city_name: "",
+      type_name: "",
       ...record,
     });
     setEditingKey(record._id);
@@ -79,12 +79,12 @@ const App = (props) => {
       setLoading(true);
 
       const put_data = {
-        city_name: row.city_name,
+        type_name: row.type_name,
       };
 
       await axios({
         method: "put",
-        url: `http://127.0.0.1:9798/api/city/${key}`,
+        url: `http://127.0.0.1:9798/api/property_type/${key}`,
         data: put_data,
       }).then(function (response) {
         let data = response.data;
@@ -92,7 +92,7 @@ const App = (props) => {
         // openNotificationWithIcon("success");
         api["success"]({
           message: "Update success",
-          description: `City name: ${data.city_name}`,
+          description: `Type name: ${data.type_name}`,
         });
         setLoading(false);
         setEditingKey("");
@@ -114,14 +114,14 @@ const App = (props) => {
 
     await axios({
       method: "delete",
-      url: `http://127.0.0.1:9798/api/city/${key}`,
+      url: `http://127.0.0.1:9798/api/property_type/${key}`,
     }).then(function (response) {
       let data = response.data;
       // console.log("aaaaa=======>", data);
       // openNotificationWithIcon("success");
       api["success"]({
         message: "Delete success",
-        description: `City name: ${data.city_name}`,
+        description: `Type name: ${data.type_name}`,
       });
       setLoading(false);
       setEditingKey("");
@@ -130,9 +130,9 @@ const App = (props) => {
 
   const columns = [
     {
-      title: "City Name",
-      dataIndex: "city_name",
-      key: "city_name",
+      title: "Type Name",
+      dataIndex: "type_name",
+      key: "type_name",
       // render: (text) => <a href="https://www.w3schools.com">{text}</a>,
       editable: true,
       width: "50%",

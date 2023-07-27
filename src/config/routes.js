@@ -4,6 +4,7 @@ import Home from "../home";
 import About from "../about";
 import User from "../user";
 import Cities from "../cities"
+import PropertyType from "../proptype"
 // === End Routes ===
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/about" exact element={<About />}></Route>
         <Route path="/user" exact element={<User />}></Route>
         <Route path="/cities" exact element={<Cities />}></Route>
+        <Route path="/property_type" exact element={<PropertyType />}></Route>
       </Routes>
     </>
   );
