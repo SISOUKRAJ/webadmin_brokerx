@@ -44,8 +44,8 @@ const Cities = () => {
   };
 
   const onFinishFailed = (e) => {
-    console.log("bbb", e);
-    message.error("Submit failed!");
+    // console.log("bbb", e);
+    // message.error("Submit failed!");
   };
 
   const onFill = () => {

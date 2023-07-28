@@ -34,7 +34,7 @@ const User = () => {
   };
 
   const onFinishFailed = () => {
-    message.error("Submit failed!");
+    // message.error("Submit failed!");
   };
 
   const onFill = () => {

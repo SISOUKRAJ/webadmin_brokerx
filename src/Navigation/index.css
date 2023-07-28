@@ -47,6 +47,13 @@
   /* background-color: var(--color-green); */
   border-color: var(--color-green);
 }
+/* =========================== Header user info =========================== */
+.ant-popover{
+ width: 250px;
+}
+.middle-line{
+  margin: 10px 0px;
+}
 /* =========================== Contents =========================== */
 .main-contents {
   display: flex;
@@ -88,7 +95,11 @@
 .ant-form-item{
   margin-bottom: 10px !important;
 }
-/* =========================== ant design =========================== */
+
+.ant-form-item-label{
+  padding: 0 0 3px !important;
+}
+/* =========================== Side bar =========================== */
 :where(.css-dev-only-do-not-override-1sn0ohr).ant-menu-inline {
   width: 20% !important;
 }
