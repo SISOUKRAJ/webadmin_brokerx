@@ -1,0 +1,11 @@
+.dynamic-delete-button-box {
+  margin-left: 10px;
+}
+.dynamic-delete-button {
+  font-size: 25px;
+  height: 54px;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+}
