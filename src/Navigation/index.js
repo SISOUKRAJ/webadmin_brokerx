@@ -4,7 +4,8 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   DesktopOutlined,
-  SettingOutlined
+  SettingOutlined,
+  CloudUploadOutlined,
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +34,9 @@ const items = [
     getItem("Properties", "/properties"),
   ]),
   getItem("about", "/about", <SettingOutlined />),
+  getItem("Images Upload", "/image_upload", <CloudUploadOutlined />),
 ];
+
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {

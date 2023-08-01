@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../home";
 import About from "../about";
 import User from "../user";
-import Cities from "../cities"
-import PropertyType from "../proptype"
-import Properties from "../properties"
+import Cities from "../cities";
+import PropertyType from "../proptype";
+import Properties from "../properties";
+import ImageUpload from "../images_upload";
 // === End Routes ===
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/cities" exact element={<Cities />}></Route>
         <Route path="/property_type" exact element={<PropertyType />}></Route>
         <Route path="/properties" exact element={<Properties />}></Route>
+        <Route path="/image_upload" exact element={<ImageUpload />}></Route>
       </Routes>
     </>
   );
