@@ -11,7 +11,7 @@ import {
   Upload,
   Modal,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 
 import DataTable from "./table";
 import "./index.css";
@@ -24,20 +24,38 @@ const Cities = () => {
   //   name: "",
   //   type_name: "",
   // });
-  const [file, setFile] = useState([]);
 
-  const onFinish = async (e) => {
+  // const [fileTest, setFileTest] = useState([]);
+
+  const onFinish = async (data) => {
     // e.preventDefault();
-    console.log("e", file[0]);
+    console.log("data", data?.file);
+
+    const arrayImg = data?.file;
+
     // message.success("Submit success!");
     // setLoading(true);
 
     const formData = new FormData();
-    formData.append("file", file[0]);
+    formData.append("name1", "xxx");
+    formData.append("name2", "xxx");
+    formData.append("name3", "xxx");
+    // for (let i = 0; i < arrayImg.length; i++) {
+    //   console.log(arrayImg[i].originFileObj);
+    // }
+
+    arrayImg.map((index) => {
+      return formData.append(`images`, index.originFileObj);
+    });
+    // console.log("fileTest", images);
+
+    const URL = "http://127.0.0.1:9798/api/image_property"; // http://localhost:4000/picture
+
     await axios({
-      method: "post",
-      url: `http://127.0.0.1:9798/api/image_property`,
-      formData,
+      method: "POST",
+      url: URL,
+      data: formData,
+      header: { "Content-Type": "multipart/form-data" },
     }).then(function (response) {
       let data = response.data;
       console.log("aaaaa=======>", data);
@@ -66,11 +84,10 @@ const Cities = () => {
   };
 
   const normFile = (e) => {
-    // console.log("Upload event:", e);
+    console.log("Upload event:", e);
     if (Array.isArray(e)) {
       return e;
     }
-    setFile(e?.fileList);
     return e?.fileList;
   };
 
@@ -159,6 +176,7 @@ const Cities = () => {
                   // fileList={fileList}
                   onPreview={handlePreview}
                   // onChange={handleChange}
+                  type="file"
                 >
                   {/* {fileList.length >= 8 ? null : uploadButton} */}
                   {uploadButton}
