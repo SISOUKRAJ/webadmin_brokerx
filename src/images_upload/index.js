@@ -25,24 +25,14 @@ const Cities = () => {
   //   type_name: "",
   // });
 
-  // const [fileTest, setFileTest] = useState([]);
-
   const onFinish = async (data) => {
-    // e.preventDefault();
-    console.log("data", data?.file);
-
+    // console.log("data", data?.file);
     const arrayImg = data?.file;
-
-    // message.success("Submit success!");
-    // setLoading(true);
 
     const formData = new FormData();
     formData.append("name1", "xxx");
     formData.append("name2", "xxx");
     formData.append("name3", "xxx");
-    // for (let i = 0; i < arrayImg.length; i++) {
-    //   console.log(arrayImg[i].originFileObj);
-    // }
 
     arrayImg.map((index) => {
       return formData.append(`images`, index.originFileObj);
@@ -51,21 +41,29 @@ const Cities = () => {
 
     const URL = "http://127.0.0.1:9798/api/image_property"; // http://localhost:4000/picture
 
-    await axios({
-      method: "POST",
-      url: URL,
-      data: formData,
-      header: { "Content-Type": "multipart/form-data" },
-    }).then(function (response) {
-      let data = response.data;
-      console.log("aaaaa=======>", data);
-      // openNotificationWithIcon("success");
-      // api["success"]({
-      //   message: "Save success",
-      //   description: `All images success`,
-      // });
-      setLoading(false);
-    });
+    try {
+      await axios({
+        method: "POST",
+        url: URL,
+        data: formData,
+        header: { "Content-Type": "multipart/form-data" },
+      }).then(function (response) {
+        let data = response.data;
+        console.log("aaaaa=======>", data.message);
+        // openNotificationWithIcon("success");
+        api["success"]({
+          message: "Save success",
+          description: data.message,
+        });
+        setLoading(false);
+      });
+    } catch (errInfo) {
+      // console.log("Validate Failed:", errInfo);
+      api["error"]({
+        message: "Update Failed!",
+        description: errInfo.title,
+      });
+    }
   };
 
   // const onFinishFailed = (e) => {
@@ -164,7 +162,7 @@ const Cities = () => {
                 // extra="Image profile"
                 rules={[
                   { required: true, message: "Please input image!" },
-                  // { type: "array", max: 1 },
+                  { type: "array", min: 2 },
                 ]}
               >
                 {/* <Upload name="logo" action="/upload.do" listType="picture">
