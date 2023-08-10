@@ -10,16 +10,17 @@ import {
   Select,
   Space,
   notification,
-  message,
+  // message,
   InputNumber,
   Radio,
   Upload,
   Modal,
+  Image,
 } from "antd";
 import {
   MinusCircleOutlined,
   PlusOutlined,
-  UploadOutlined,
+  // UploadOutlined,
 } from "@ant-design/icons";
 
 import DataTable from "./table";
@@ -31,6 +32,8 @@ const Cities = () => {
   const [loading, setLoading] = useState(false);
   const [typeName, setTypeName] = useState([]);
   const [cities, setCity] = useState([]);
+  const [fileList, setFileList] = useState([]);
+
   // const [formData, setFromData] = useState({
   //   name: "",
   //   type_name: "",
@@ -79,9 +82,9 @@ const Cities = () => {
     getCity();
   }, []);
 
-  const onFinish = async (e) => {
-    console.log("aaa", e);
-    message.success("Submit success!");
+  const onFinish = async (data) => {
+    console.log("aaa", data);
+    // message.success("Submit success!");
     setLoading(true);
 
     // await axios({
@@ -131,8 +134,19 @@ const Cities = () => {
   // const onSearch = (value) => {
   //   console.log("search:", value);
   // };
-  const normFile = (e) => {
-    console.log("Upload event:", e);
+  const Profile = (e) => {
+    // console.log("Profile event:", e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
+
+  const handleChangeProfile = ({ fileList: newFileList }) =>
+    setFileList(newFileList);
+
+  const Gallery = (e) => {
+    // console.log("Gallery event:", e);
     if (Array.isArray(e)) {
       return e;
     }
@@ -162,7 +176,6 @@ const Cities = () => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  // const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -197,6 +210,10 @@ const Cities = () => {
       <Row style={{ marginTop: 10, marginBottom: 10 }}>
         <Col md={8}>
           <div className="left-box">
+            {/* <Image
+              width={200}
+              src="http://127.0.0.1:9798/images/property/present1.jpg"
+            /> */}
             <Form
               form={form}
               layout="vertical"
@@ -238,10 +255,10 @@ const Cities = () => {
                 </Col>
                 <Col md={8}>
                   <Form.Item
-                    name="badroom"
-                    label="Badroom"
+                    name="bathroom"
+                    label="Bathroom"
                     rules={[
-                      { required: true, message: "Please input badroom!" },
+                      { required: true, message: "Please input bathroom!" },
                       // { type: "string", warningOnly: true },
                       // { type: "string", min: 2 },
                     ]}
@@ -251,7 +268,7 @@ const Cities = () => {
                       style={{
                         width: "100%",
                       }}
-                      placeholder="Input your badroom"
+                      placeholder="Input your bathroom"
                     />
                   </Form.Item>
                 </Col>
@@ -298,12 +315,12 @@ const Cities = () => {
                     style={{
                       marginLeft: 10,
                     }}
-                    name="per"
+                    name="price_per"
                     label="Per or /"
                     rules={[{ required: true, message: "Please selete per!" }]}
                   >
                     <Radio.Group>
-                      <Radio value="mouth">mouth</Radio>
+                      <Radio value="month">month</Radio>
                       <Radio value="year">year</Radio>
                     </Radio.Group>
                   </Form.Item>
@@ -374,7 +391,6 @@ const Cities = () => {
                   options={cities}
                 />
               </Form.Item>
-
               <Form.Item
                 name="listing"
                 label="About This Listing"
@@ -446,7 +462,7 @@ const Cities = () => {
                           }}
                           icon={<PlusOutlined />}
                         >
-                          Add field
+                          Add Listing
                         </Button>
                         <Form.ErrorList errors={errors} />
                       </Form.Item>
@@ -456,27 +472,123 @@ const Cities = () => {
               </Form.Item>
 
               <Form.Item
-                name="gallery"
-                label="Upload"
+                name="amenities"
+                label="Amenities"
+                rules={[{ required: true, message: "Please add amenities!" }]}
+              >
+                <Form.List
+                  name="amenities"
+                  rules={[
+                    {
+                      validator: async (_, names) => {
+                        if (!names || names.length < 0) {
+                          return Promise.reject(
+                            new Error("Please input your amenities!")
+                          );
+                        }
+                      },
+                    },
+                  ]}
+                >
+                  {(fields, { add, remove }, { errors }) => (
+                    <>
+                      {fields.map((field, index) => (
+                        <Form.Item
+                          // {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+                          label={index === 0 ? "" : ""}
+                          required={false}
+                          key={field.key}
+                        >
+                          <Row>
+                            <Col md={22}>
+                              <Form.Item
+                                {...field}
+                                validateTrigger={["onChange", "onBlur"]}
+                                rules={[
+                                  {
+                                    required: true,
+                                    whitespace: true,
+                                    message: "Please input amenities!",
+                                  },
+                                ]}
+                                noStyle
+                              >
+                                <TextArea
+                                  style={{ width: "100%" }}
+                                  rows={1}
+                                  placeholder="Decription"
+                                />
+                              </Form.Item>
+                            </Col>
+                            <Col md={2}>
+                              <div className="dynamic-delete-button-box">
+                                {fields.length > 0 ? (
+                                  <MinusCircleOutlined
+                                    className="dynamic-delete-button-amenities"
+                                    onClick={() => remove(field.name)}
+                                  />
+                                ) : null}
+                              </div>
+                            </Col>
+                          </Row>
+                        </Form.Item>
+                      ))}
+                      <Form.Item>
+                        <Button
+                          type="dashed"
+                          onClick={() => add()}
+                          style={{
+                            width: "100%",
+                          }}
+                          icon={<PlusOutlined />}
+                        >
+                          Add Amenities
+                        </Button>
+                        <Form.ErrorList errors={errors} />
+                      </Form.Item>
+                    </>
+                  )}
+                </Form.List>
+              </Form.Item>
+
+              <Form.Item
+                name="profile"
+                label="Profile"
                 valuePropName="fileList"
-                getValueFromEvent={normFile}
+                getValueFromEvent={Profile}
                 // extra="Image profile"
                 rules={[
                   { required: true, message: "Please input image!" },
-                  // { type: "array", max: 1 },
+                  { type: "array", max: 1 },
                 ]}
               >
-                {/* <Upload name="logo" action="/upload.do" listType="picture">
-                  <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload> */}
                 <Upload
                   action="/upload.do"
                   listType="picture-card"
-                  // fileList={fileList}
+                  fileList={fileList}
                   onPreview={handlePreview}
-                  // onChange={handleChange}
+                  onChange={handleChangeProfile}
                 >
-                  {/* {fileList.length >= 8 ? null : uploadButton} */}
+                  {fileList.length >= 1 ? null : uploadButton}
+                </Upload>
+              </Form.Item>
+
+              <Form.Item
+                name="gallery"
+                label="Gallery"
+                valuePropName="fileList"
+                getValueFromEvent={Gallery}
+                // extra="Image profile"
+                rules={[
+                  { required: true, message: "Please input image!" },
+                  { type: "array", min: 2 },
+                ]}
+              >
+                <Upload
+                  action="/upload.do"
+                  listType="picture-card"
+                  onPreview={handlePreview}
+                >
                   {uploadButton}
                 </Upload>
               </Form.Item>

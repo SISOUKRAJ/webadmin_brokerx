@@ -9,3 +9,11 @@
   justify-items: center;
   align-items: center;
 }
+
+.dynamic-delete-button-amenities {
+  font-size: 25px;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;}
