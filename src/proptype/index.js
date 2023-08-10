@@ -31,10 +31,9 @@ const Cities = () => {
     }).then(function (response) {
       let data = response.data;
       // console.log("aaaaa=======>", data);
-      // openNotificationWithIcon("success");
       api["success"]({
         message: "Save success",
-        description: `Type name: ${data.city_name}`,
+        description: `Type name: ${data.type_name}`,
       });
       setLoading(false);
       form.setFieldsValue({
