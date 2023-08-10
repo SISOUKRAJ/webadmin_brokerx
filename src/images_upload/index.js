@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   Breadcrumb,
@@ -11,7 +11,7 @@ import {
   Upload,
   Modal,
 } from "antd";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 
 import DataTable from "./table";
 import "./index.css";
@@ -30,9 +30,9 @@ const Cities = () => {
     const arrayImg = data?.file;
 
     const formData = new FormData();
-    formData.append("name1", "xxx");
-    formData.append("name2", "xxx");
-    formData.append("name3", "xxx");
+    // formData.append("name1", "xxx");
+    // formData.append("name2", "xxx");
+    // formData.append("name3", "xxx");
 
     arrayImg.map((index) => {
       return formData.append(`images`, index.originFileObj);
@@ -56,6 +56,9 @@ const Cities = () => {
           description: data.message,
         });
         setLoading(false);
+        form.setFieldsValue({
+          file: [],
+        });
       });
     } catch (errInfo) {
       // console.log("Validate Failed:", errInfo);
@@ -82,7 +85,7 @@ const Cities = () => {
   };
 
   const normFile = (e) => {
-    console.log("Upload event:", e);
+    // console.log("Upload event:", e);
     if (Array.isArray(e)) {
       return e;
     }
