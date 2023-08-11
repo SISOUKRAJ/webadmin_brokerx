@@ -79,7 +79,7 @@
   background-color: var(--color-white);
   margin-right: 10px;
   height: var(--height-contents);
-  padding: 20px;
+  padding: 20px 20px 5px 20px;
   border-radius: 10px;
 }
 
@@ -88,7 +88,7 @@
   background-color: var(--color-white);
   margin-left: 10px;
   height: var(--height-contents);
-  padding: 20px;
+  padding: 20px 20px 5px 20px;
   border-radius: 10px;
 }
 

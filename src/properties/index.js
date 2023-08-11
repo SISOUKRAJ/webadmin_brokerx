@@ -15,7 +15,7 @@ import {
   Radio,
   Upload,
   Modal,
-  Image,
+  // Image,
 } from "antd";
 import {
   MinusCircleOutlined,
@@ -32,7 +32,6 @@ const Cities = () => {
   const [loading, setLoading] = useState(false);
   const [typeName, setTypeName] = useState([]);
   const [cities, setCity] = useState([]);
-  const [fileList, setFileList] = useState([]);
 
   // const [formData, setFromData] = useState({
   //   name: "",
@@ -87,23 +86,57 @@ const Cities = () => {
     // message.success("Submit success!");
     setLoading(true);
 
-    // await axios({
-    //   method: "post",
-    //   url: `http://127.0.0.1:9798/api/property_type`,
-    //   data: e,
-    // }).then(function (response) {
-    //   let data = response.data;
-    //   // console.log("aaaaa=======>", data);
-    //   // openNotificationWithIcon("success");
-    //   api["success"]({
-    //     message: "Save success",
-    //     description: `Type name: ${data.city_name}`,
-    //   });
-    //   setLoading(false);
-    //   form.setFieldsValue({
-    //     type_name: "",
-    //   });
-    // });
+    const listing = data.listing.map((index) => {
+      return {
+        name: index,
+      };
+    });
+    // console.log("listing", listing);
+
+    const amenities = data.amenities.map((index) => {
+      return {
+        name: index,
+      };
+    });
+    // console.log("amenities", amenities);
+
+    const formData = new FormData();
+    formData.append("prop_name", data.prop_name);
+    formData.append("bedroom", data.bedroom);
+    formData.append("bathroom", data.bathroom);
+    formData.append("parking", data.parking);
+    formData.append("price", data.price);
+    formData.append("price_per", data.price_per);
+    formData.append("currency", data.currency);
+    formData.append("property_type", data.property_type);
+    formData.append("city", data.city);
+    listing.map((index) => {
+      return formData.append(`listing`, index.name);
+    });
+    amenities.map((index) => {
+      return formData.append(`amenities`, index.name);
+    });
+    data.gallery.map((index) => {
+      return formData.append(`gallery`, index.originFileObj);
+    });
+
+    await axios({
+      method: "post",
+      url: `http://127.0.0.1:9798/api/property`,
+      data: formData,
+    }).then(function (response) {
+      let data = response.data;
+      console.log("aaaaa=======>", data);
+      // openNotificationWithIcon("success");
+      api["success"]({
+        message: "Save success",
+        description: `Property name: ${data.prop_name}`,
+      });
+      setLoading(false);
+      form.setFieldsValue({
+        prop_name: "",
+      });
+    });
   };
 
   // const onFinishFailed = (e) => {
@@ -118,32 +151,23 @@ const Cities = () => {
   const onFill = () => {
     form.setFieldsValue({
       name: "",
-      type_name: [],
-      city_name: [],
+      property_type: [],
+      city: [],
       price: "",
       per: [],
       currency: [],
       listing: [],
+      amenities: [],
       bedroom: "",
-      badroom: "",
+      bathroom: "",
       parking: "",
-      upload: [],
+      gallery: [],
     });
   };
 
   // const onSearch = (value) => {
   //   console.log("search:", value);
   // };
-  const Profile = (e) => {
-    // console.log("Profile event:", e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
-
-  const handleChangeProfile = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
 
   const Gallery = (e) => {
     // console.log("Gallery event:", e);
@@ -210,10 +234,6 @@ const Cities = () => {
       <Row style={{ marginTop: 10, marginBottom: 10 }}>
         <Col md={8}>
           <div className="left-box">
-            {/* <Image
-              width={200}
-              src="http://127.0.0.1:9798/images/property/present1.jpg"
-            /> */}
             <Form
               form={form}
               layout="vertical"
@@ -222,7 +242,7 @@ const Cities = () => {
               autoComplete="off"
             >
               <Form.Item
-                name="name"
+                name="prop_name"
                 label="Name"
                 rules={[
                   { required: true, message: "Please input name!" },
@@ -342,7 +362,7 @@ const Cities = () => {
                 </Radio.Group>
               </Form.Item>
               <Form.Item
-                name="type_name"
+                name="property_type"
                 label="Property Type"
                 rules={[
                   { required: true, message: "Please selete Type Name!" },
@@ -367,7 +387,7 @@ const Cities = () => {
                 />
               </Form.Item>
               <Form.Item
-                name="city_name"
+                name="city"
                 label="City Name"
                 rules={[
                   { required: true, message: "Please selete City Name!" },
@@ -549,28 +569,6 @@ const Cities = () => {
                     </>
                   )}
                 </Form.List>
-              </Form.Item>
-
-              <Form.Item
-                name="profile"
-                label="Profile"
-                valuePropName="fileList"
-                getValueFromEvent={Profile}
-                // extra="Image profile"
-                rules={[
-                  { required: true, message: "Please input image!" },
-                  { type: "array", max: 1 },
-                ]}
-              >
-                <Upload
-                  action="/upload.do"
-                  listType="picture-card"
-                  fileList={fileList}
-                  onPreview={handlePreview}
-                  onChange={handleChangeProfile}
-                >
-                  {fileList.length >= 1 ? null : uploadButton}
-                </Upload>
               </Form.Item>
 
               <Form.Item
