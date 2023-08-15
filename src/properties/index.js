@@ -22,11 +22,10 @@ import {
   PlusOutlined,
   // UploadOutlined,
 } from "@ant-design/icons";
-
 import DataTable from "./table";
 import "./index.css";
 
-const Cities = () => {
+const Properties = () => {
   const [form] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
   const [loading, setLoading] = useState(false);
@@ -356,9 +355,9 @@ const Cities = () => {
                 rules={[{ required: true, message: "Please selete currency!" }]}
               >
                 <Radio.Group>
-                  <Radio value="kip">kip</Radio>
-                  <Radio value="baht">baht</Radio>
-                  <Radio value="dollar">dollar</Radio>
+                  <Radio value="kip">Kip</Radio>
+                  <Radio value="baht">Baht</Radio>
+                  <Radio value="dollar">Dollar</Radio>
                 </Radio.Group>
               </Form.Item>
               <Form.Item
@@ -388,9 +387,9 @@ const Cities = () => {
               </Form.Item>
               <Form.Item
                 name="city"
-                label="City Name"
+                label="City"
                 rules={[
-                  { required: true, message: "Please selete City Name!" },
+                  { required: true, message: "Please selete City!" },
                 ]}
               >
                 <Select
@@ -399,7 +398,7 @@ const Cities = () => {
                     width: "100%",
                   }}
                   showSearch
-                  placeholder="Select a City Name!"
+                  placeholder="Select a City!"
                   optionFilterProp="children"
                   // onChange={onChange}
                   // onSearch={onSearch}
@@ -629,4 +628,4 @@ const Cities = () => {
   );
 };
 
-export default Cities;
+export default Properties;

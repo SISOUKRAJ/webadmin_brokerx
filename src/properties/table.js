@@ -18,13 +18,15 @@ import {
   CloseCircleOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-
 import ModalEdit from "./modal";
+// * images
+const ImgLoad = require("../assets/images/broker-x 3-01.png");
 
 const App = (props) => {
   // console.log("props", props);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+
   const [data, setData] = useState();
 
   const [api, contextHolder] = notification.useNotification();
@@ -36,7 +38,7 @@ const App = (props) => {
       url: "http://127.0.0.1:9798/api/property",
     }).then(function (response) {
       let data = response.data;
-      console.log("aaaaa=======>", data);
+      // console.log("aaaaa=======>", data);
       const result = data.map((index) => {
         return {
           key: index._id,
@@ -48,10 +50,14 @@ const App = (props) => {
       setLoading(false);
     });
   };
+  localStorage.setItem("Loading", false);
+  const LoadingModal = localStorage.getItem("Loading");
+  console.log("LoadingModal", LoadingModal);
 
   useEffect(() => {
     getAll();
-  }, [loading, props.loading]);
+    localStorage.getItem("Loading");
+  }, [loading]);
 
   const handleDelete = async (key) => {
     // const newData = dataSource.filter((item) => item.key !== key);
@@ -59,20 +65,19 @@ const App = (props) => {
     // console.log("==>", key);
     setLoading(true);
 
-    // await axios({
-    //   method: "delete",
-    //   url: `http://127.0.0.1:9798/api/property_type/${key}`,
-    // }).then(function (response) {
-    //   let data = response.data;
-    //   // console.log("aaaaa=======>", data);
-    //   // openNotificationWithIcon("success");
-    //   api["success"]({
-    //     message: "Delete success",
-    //     description: `Type name: ${data.type_name}`,
-    //   });
-    //   setLoading(false);
-    //   setEditingKey("");
-    // });
+    await axios({
+      method: "delete",
+      url: `http://127.0.0.1:9798/api/property/${key}`,
+    }).then(function (response) {
+      let data = response.data;
+      // console.log("aaaaa=======>", data);
+      // openNotificationWithIcon("success");
+      api["success"]({
+        message: "Delete success",
+        description: `Property name: ${data.prop_name}`,
+      });
+      setLoading(false);
+    });
   };
 
   const columns = [
@@ -80,16 +85,21 @@ const App = (props) => {
       title: "Image",
       dataIndex: "",
       key: "",
-      render: (record) => (
-        <>
-          <Image
-            src={`http://127.0.0.1:9798/images/property/${record.gallery[0]?.name}`}
-            alt="BrokerX"
-          />
-        </>
-      ),
+      render: (record) => {
+        const imagesProfile =
+          record?.gallery[0]?.name === undefined ||
+          record?.gallery[0]?.name === "" ||
+          record?.gallery[0]?.name === null
+            ? ImgLoad
+            : `http://127.0.0.1:9798/images/property/${record?.gallery[0]?.name}`;
+        return (
+          <>
+            <Image src={imagesProfile} alt="BrokerX" />
+          </>
+        );
+      },
       editable: true,
-      width: "15%",
+      width: "10%",
     },
     {
       title: "Name",
@@ -119,19 +129,41 @@ const App = (props) => {
         </>
       ),
       editable: true,
-      width: "10%",
+      width: "15%",
     },
     {
       title: "Price",
       dataIndex: "",
       key: "",
-      render: (record) => (
-        <>
-          <label>
-            {record.price}/{record.price_per}
-          </label>
-        </>
-      ),
+      render: (record) => {
+        const currency =
+          record.currency === "kip"
+            ? "la-LA"
+            : record.currency === "baht"
+            ? "th-TH"
+            : record.currency === "dollar"
+            ? "en-US"
+            : null;
+        const currencyString =
+          record.currency === "kip"
+            ? "LAK"
+            : record.currency === "baht"
+            ? "THB"
+            : record.currency === "dollar"
+            ? "USD"
+            : null;
+        return (
+          <>
+            <label>
+              {record.price.toLocaleString(currency, {
+                style: "currency",
+                currency: currencyString,
+              })}
+              /{record.price_per}
+            </label>
+          </>
+        );
+      },
       editable: true,
       width: "15%",
     },

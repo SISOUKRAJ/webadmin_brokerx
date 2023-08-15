@@ -2,6 +2,8 @@
   /* height */
   --height-header: 6vh;
   --height-contents: 95%;
+  /* height */
+  --padding-height: 20px 20px 10px 20px;
   /* Color */
   --color-green: #2a6d5b;
   --color-yellow: #f0d711;
@@ -48,10 +50,10 @@
   border-color: var(--color-green);
 }
 /* =========================== Header user info =========================== */
-.ant-popover{
- width: 250px;
+.ant-popover {
+  width: 250px;
 }
-.middle-line{
+.middle-line {
   margin: 10px 0px;
 }
 /* =========================== Contents =========================== */
@@ -79,7 +81,7 @@
   background-color: var(--color-white);
   margin-right: 10px;
   height: var(--height-contents);
-  padding: 20px 20px 5px 20px;
+  padding: var(--padding-height);
   border-radius: 10px;
 }
 
@@ -88,15 +90,15 @@
   background-color: var(--color-white);
   margin-left: 10px;
   height: var(--height-contents);
-  padding: 20px 20px 5px 20px;
+  padding: var(--padding-height);
   border-radius: 10px;
 }
 
-.ant-form-item{
+.ant-form-item {
   margin-bottom: 10px !important;
 }
 
-.ant-form-item-label{
+.ant-form-item-label {
   padding: 0 0 3px !important;
 }
 /* =========================== Side bar =========================== */
